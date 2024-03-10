@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+ <name>robot_simulation</name>
+ <version>0.0.1</version>
+ <description>Gazebo simulation of robot</description>
+ <maintainer email="ximenzi@nus-iss.com">ximenzi</maintainer>
+ <license>MIT</license>
+
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+
+  <!-- 可能有问题 -->
+  <depend>rosidl_default_generators</depend>
+
+  <depend>ros_gz</depend>
+
+  <depend>controller_manager</depend>
+  <depend>urdf</depend>
+
+  <!-- 可能有问题 -->
+  <depend>ros2_controllers</depend>
+
+
+<!-- 暂时全部使用ros_gz，可能会有问题 -->
+  <!-- <depend>gazebo_plugins</depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_ros_control</depend> -->
+
+  <depend>joint_state_broadcaster </depend>
+  <depend>joint_state_publisher</depend>
+  <depend>robot_state_publisher</depend>
+
+  <!-- 需要自己安装再试 -->
+  <depend>cmd_vel_mux</depend>
+
+<!-- 可能有问题 -->
+  <depend>rosidl_runtime_cpp</depend>
+
+  <depend>xacro</depend>
+
+
+
+  <export>
+    <!-- 这里要改对应文件：
+    Finally, we need to set the environment variable GZ_SIM_RESOURCE_PATH 
+    so Gazebo can know where to find models. 
+    See the Finding resource document to learn more about this environment variable. 
+    This was not needed for gazebo_ros_pkgs because it used the <export> tag in package.xml 
+    to populate a similar environment variable for Gazebo (GAZEBO_MODEL_PATH). -->
+    <!-- <gazebo_ros gazebo_model_path="${prefix}/models/"/> -->
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

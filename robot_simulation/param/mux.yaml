@@ -1,0 +1,43 @@
+# Created on: Mar 2, 2024
+#     Author: ximenzi
+# Configuration for subscribers to multiple cmd_vel sources.
+#
+# Individual subscriber configuration:
+#   name:           Source name
+#   topic:          The topic that provides cmd_vel messages
+#   timeout:        Time in seconds without incoming messages to consider this topic inactive
+#   priority:       Priority: an UNIQUE unsigned integer from 0 (lowest) to MAX_INT
+#   short_desc:     Short description (optional)
+cmd_vel_mux:
+  ros__parameters:
+    subscribers:
+        default_input:
+          topic:       "input/default"
+          timeout:     0.1
+          priority:    0
+          short_desc:  "The default cmd_vel, controllers unaware that we are multiplexing cmd_vel should come here"
+        Teleoperation:  
+          topic:       "input/teleop"
+          timeout:     1.0
+          priority:    10
+          short_desc:  "Keyboard operation"
+        Safe reactive controller:
+          topic:       "input/safety_controller"
+          timeout:     0.2
+          priority:    9
+          short_desc:  "Safe reactive controller"
+        ObstacleAvoid:
+          topic:       "input/avoid"
+          timeout:     1.0
+          priority:    7
+          short_desc:  "ObstacleAvoid"
+        Switch:
+          topic:       "input/switch"
+          timeout:     1.0
+          priority:    6
+          short_desc:  "Switch"
+        navigation_stack:
+          topic:       "input/navi"
+          timeout:     1.0
+          priority:    5
+          short_desc:  "navigation_stack"
