@@ -1,6 +1,16 @@
 # Intelligent-Guide-Robot-Gazebo-Sim
 Gazebo simulation of an intelligent guide robot in museum with audio interaction.
 
+
+ros2 commands:
+```
+source install/setup.bash
+colcon build --packages-select robot_simulation
+ros2 launch robot_simulation robot_museum.launch.py
+rosdep install --ignore-packages-from-source --from-path src/robotics/robot_simulation/ --rosdistro humble -y
+colcon build --packages-select cmd_vel_mux  
+pip install catkin_pkg
+```
 ---
 
 - [Github SSH Key Setup](#github-ssh-key-setup)
@@ -278,16 +288,15 @@ git pull origin main
    
     If there are any conflicts between your local and remote branches, Git will prompt you to resolve them. After resolving any conflicts, you can commit the changes to complete the merge.
 
+Delete your branch from github, run 
+```
+git push origin --delete old-branch
+```
 Delete your branch locally
 ```
 git branch --delete old-branch
 #or
 git branch -d old-branch
-```
-
-Delete your branch from github, run 
-```
-git push origin --delete old-branch
 ```
 **When you’re ready to work on a new feature, create a new branch.**
 

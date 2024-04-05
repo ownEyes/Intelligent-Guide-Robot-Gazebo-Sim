@@ -11,6 +11,8 @@ from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
+    
+    
     launch_file_dir = os.path.join(get_package_share_directory('robot_simulation'), 'launch')
     ros_gz_sim = get_package_share_directory('ros_gz_sim')
 
@@ -31,6 +33,11 @@ def generate_launch_description():
             'GZ_SIM_RESOURCE_PATH',
             os.path.join(get_package_share_directory('robot_simulation'),
                          'models'))
+    # models_path=os.path.join(get_package_share_directory('robot_simulation'),
+    #                      'models')
+    # worlds_path=os.path.join(get_package_share_directory('robot_simulation'),
+    #                      'models')
+    # os.environ['GZ_SIM_RESOURCE_PATH']=models_path+':'+worlds_path
 
 # launch Gazebo server
     gzserver_cmd = IncludeLaunchDescription(

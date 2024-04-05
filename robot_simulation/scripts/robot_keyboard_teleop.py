@@ -3,7 +3,10 @@ import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 
-import sys, select, termios, tty
+import sys
+import select
+import termios
+import tty
 
 msg = """
 Control The Robot!
@@ -23,24 +26,29 @@ CTRL-C to quit
 """
 
 moveBindings = {
-        'i':(1,0),
-        'o':(1,-1),
-        'j':(0,1),
-        'l':(0,-1),
-        'u':(1,1),
-        ',':(-1,0),
-        '.':(-1,1),
-        'm':(-1,-1),
-           }
+    'i': (1, 0),
+    'o': (1, -1),
+    'j': (0, 1),
+    'l': (0, -1),
+    'u': (1, 1),
+    ',': (-1, 0),
+    '.': (-1, 1),
+    'm': (-1, -1),
+}
 
-speedBindings={
-        'q':(1.1,1.1),
-        'z':(.9,.9),
-        'w':(1.1,1),
-        'x':(.9,1),
-        'e':(1,1.1),
-        'c':(1,.9),
-          }
+speedBindings = {
+    'q': (1.1, 1.1),
+    'z': (.9, .9),
+    'w': (1.1, 1),
+    'x': (.9, 1),
+    'e': (1, 1.1),
+    'c': (1, .9),
+}
+
+speed = .2
+turn = 1.0
+settings = termios.tcgetattr(sys.stdin)
+
 
 def getKey():
     tty.setraw(sys.stdin.fileno())
@@ -50,19 +58,21 @@ def getKey():
     else:
         key = ''
 
-    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+    global settings
+    # termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+    termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, settings)
     return key
 
-speed = .2
-turn = 1
 
-def vels(speed,turn):
-    return "currently:\tspeed %s\tturn %s " % (speed,turn)
+def vels(speed, turn):
+    return "currently:\tspeed %s\tturn %s " % (speed, turn)
+
 
 class TeleopNode(Node):
     def __init__(self):
         super().__init__('robot_teleop')
-        self.pub = self.create_publisher(Twist, '/cmd_vel_mux/input/teleop', 10)
+        self.pub = self.create_publisher(
+            Twist, '/cmd_vel_mux/input/teleop', 10)
 
     def publish_twist(self, twist):
         self.pub.publish(twist)
@@ -72,19 +82,21 @@ def main(args=None):
     # Capture original terminal settings
     rclpy.init(args=args)
     teleop_node = TeleopNode()
-    
-    global settings
-    settings = termios.tcgetattr(sys.stdin)  
+
+    global settings, speed, turn
+
+    # Define rate (e.g., 10 Hz)
+    rate = teleop_node.create_rate(10)
 
     x = 0
     th = 0
     status = 0
     count = 0
     acc = 0.1
-    target_speed = 0
-    target_turn = 0
-    control_speed = 0
-    control_turn = 0
+    target_speed = 0.0
+    target_turn = 0.0
+    control_speed = 0.0
+    control_turn = 0.0
     try:
         print(msg)
         print(vels(speed, turn))
@@ -99,15 +111,15 @@ def main(args=None):
                 turn = turn * speedBindings[key][1]
                 count = 0
 
-                print (vels(speed,turn))
+                print(vels(speed, turn))
                 if (status == 14):
-                    print (msg)
+                    print(msg)
                 status = (status + 1) % 15
-            elif key == ' ' or key == 'k' :
+            elif key == ' ' or key == 'k':
                 x = 0
                 th = 0
-                control_speed = 0
-                control_turn = 0
+                control_speed = 0.0
+                control_turn = 0.0
             else:
                 count = count + 1
                 if count > 4:
@@ -120,42 +132,51 @@ def main(args=None):
             target_turn = turn * th
 
             if target_speed > control_speed:
-                control_speed = min( target_speed, control_speed + 0.02 )
+                control_speed = float(min(target_speed, control_speed + 0.02))
             elif target_speed < control_speed:
-                control_speed = max( target_speed, control_speed - 0.02 )
+                control_speed = float(max(target_speed, control_speed - 0.02))
             else:
                 control_speed = target_speed
 
             if target_turn > control_turn:
-                control_turn = min( target_turn, control_turn + 0.1 )
+                control_turn = float(min(target_turn, control_turn + 0.1))
             elif target_turn < control_turn:
-                control_turn = max( target_turn, control_turn - 0.1 )
+                control_turn = float(max(target_turn, control_turn - 0.1))
             else:
-                control_turn = target_turn
+                control_turn = float(target_turn)
 
             twist = Twist()
-            
-            twist.linear.x = control_speed; twist.linear.y = 0; twist.linear.z = 0
-            twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = control_turn
-            teleop_node.publish_twist(twist)
-            rclpy.sleep(0.1)
 
-            #print("loop: {0}".format(count))
-            #print("target: vx: {0}, wz: {1}".format(target_speed, target_turn))
-            #print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
+            twist.linear.x = control_speed
+            twist.linear.y = 0.0
+            twist.linear.z = 0.0
+            twist.angular.x = 0.0
+            twist.angular.y = 0.0
+            twist.angular.z = control_turn
+            teleop_node.publish_twist(twist)
+            rate.sleep()
+
+            # print("loop: {0}".format(count))
+            # print("target: vx: {0}, wz: {1}".format(target_speed, target_turn))
+            # print("publihsed: vx: {0}, wz: {1}".format(twist.linear.x, twist.angular.z))
 
     except Exception as e:
         teleop_node.get_logger().error('Encountered an error: {}'.format(e))
 
     finally:
         twist = Twist()
-        twist.linear.x = 0; twist.linear.y = 0; twist.linear.z = 0
-        twist.angular.x = 0; twist.angular.y = 0; twist.angular.z = 0
+        twist.linear.x = 0.0
+        twist.linear.y = 0.0
+        twist.linear.z = 0.0
+        twist.angular.x = 0.0
+        twist.angular.y = 0.0
+        twist.angular.z = 0.0
         teleop_node.publish_twist(twist)
         # Clean up ROS 2 resources
         rclpy.shutdown()
-        
-    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
+
+    termios.tcsetattr(sys.stdin, termios.TCSAFLUSH, settings)
+
 
 if __name__ == '__main__':
     main()

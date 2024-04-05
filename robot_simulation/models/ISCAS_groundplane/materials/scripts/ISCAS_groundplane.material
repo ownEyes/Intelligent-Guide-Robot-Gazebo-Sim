@@ -12,8 +12,10 @@ material ISCAS_groundplane/Image
       texture_unit
       {
         texture ISCAS_groundplane.png
-	      filtering trilinear
-	      scale 0.12 0.12
+	      filtering Anisotropic
+        max_anisotropy 16
+        // Add these lines to set the texture addressing mode to repeat
+        tex_address_mode wrap wrap
       }
     }
   }
