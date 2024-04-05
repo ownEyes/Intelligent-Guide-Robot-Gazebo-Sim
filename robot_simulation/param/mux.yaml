@@ -14,7 +14,7 @@ cmd_vel_mux:
         default_input:
           topic:       "input/default"
           timeout:     0.1
-          priority:    0
+          priority:    4
           short_desc:  "The default cmd_vel, controllers unaware that we are multiplexing cmd_vel should come here"
         Teleoperation:  
           topic:       "input/teleop"

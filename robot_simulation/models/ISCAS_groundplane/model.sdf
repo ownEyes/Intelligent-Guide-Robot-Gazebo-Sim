@@ -30,9 +30,22 @@
         <material>
           <script>
             <uri>model://ISCAS_groundplane/materials/scripts</uri>
-            <uri>model://ISCAS_groundplane/materials/textures</uri>
-            <name>ISCAS_groundplane/Image </name>
+            <name>ISCAS_groundplane/Image</name>
           </script>
+          <pbr>
+            <metal>
+            <!-- <specular> -->
+              <albedo_map>materials/textures/ISCAS_groundplane.png</albedo_map>
+              <metalness>0</metalness>
+              <roughness>0</roughness>
+              <!-- <glossiness>1</glossiness> -->
+            <!-- </specular> -->
+            </metal>
+          </pbr>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.7 0.7 0.7 1</diffuse>
+          <specular>0.01 0.01 0.01 1</specular>
+          <emissive>0.01 0.01 0.01  1.000000</emissive>
         </material>
       </visual>
     </link>

@@ -21,9 +21,10 @@ find_package(xacro REQUIRED)
 find_package(ros_gz REQUIRED)
 find_package(cmd_vel_mux REQUIRED)
 
-install(DIRECTORY launch models param urdf worlds
+install(DIRECTORY launch models param urdf worlds 
   DESTINATION share/${PROJECT_NAME}/
 )
+
 
 install(PROGRAMS
   scripts/robot_keyboard_teleop.py
