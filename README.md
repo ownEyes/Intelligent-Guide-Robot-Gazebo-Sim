@@ -4,12 +4,18 @@ Gazebo simulation of an intelligent guide robot in museum with audio interaction
 
 ros2 commands:
 ```
-source install/setup.bash
-colcon build --packages-select robot_simulation
-ros2 launch robot_simulation robot_museum.launch.py
-rosdep install --ignore-packages-from-source --from-path src/robotics/robot_simulation/ --rosdistro humble -y
-colcon build --packages-select cmd_vel_mux  
 pip install catkin_pkg
+source install/setup.bash
+
+rosdep install --ignore-packages-from-source --from-path src/Intelligent-Guide-Robot-Gazebo-Sim/robot_simulation/ --rosdistro humble -y
+rosdep install --ignore-packages-from-source --from-path src/Intelligent-Guide-Robot-Gazebo-Sim/navigation_simulation --rosdistro humble -y
+
+colcon build --packages-select cmd_vel_mux
+colcon build --packages-select robot_simulation
+
+ros2 launch robot_simulation robot_museum.launch.py
+  
+
 ```
 ---
 

@@ -109,9 +109,10 @@
     <sensor type="gpu_lidar" name="${name}">
       <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
-      <update_rate>20</update_rate>
-      <topic>scan</topic>
-      <gz_frame_id>base_scan</gz_frame_id>
+      <update_rate>${update_rate}</update_rate>
+      <!-- <topic>scan</topic> -->
+      <topic>${ros_topic}</topic>
+      <gz_frame_id>${link}</gz_frame_id>
       <always_on>true</always_on>
       <lidar>
         <scan>
@@ -132,8 +133,8 @@
           <mean>0.0</mean>
           <stddev>0.01</stddev>
         </noise>
-        <topicName>${ros_topic}</topicName>
-        <frameName>${link}</frameName>
+        <!-- <topicName>${ros_topic}</topicName>
+        <frameName>${link}</frameName> -->
       </lidar>
     </sensor>
   </gazebo>

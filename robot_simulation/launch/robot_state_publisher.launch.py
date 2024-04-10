@@ -12,15 +12,15 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    use_sim_time = LaunchConfiguration('use_sim_time', default='false')
-    publish_frequency = LaunchConfiguration('publish_frequency', default='20.0')
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    publish_frequency = LaunchConfiguration(
+        'publish_frequency', default='20.0')
     # Path to your .xacro file
     xacro_file_path = os.path.join(
         get_package_share_directory('robot_simulation'),
         'urdf',
         'robot.xacro'
     )
-
 
     print('xacro_file_path : {}'.format(xacro_file_path))
 
@@ -30,7 +30,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
-            default_value='false',
+            default_value='True',
             description='Use simulation (Gazebo) clock if true'),
         DeclareLaunchArgument(
             'publish_frequency',
@@ -45,7 +45,7 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'use_sim_time': use_sim_time,
-                'publish_frequency':publish_frequency,
+                'publish_frequency': publish_frequency,
                 'robot_description': robot_desc
             }],
         ),

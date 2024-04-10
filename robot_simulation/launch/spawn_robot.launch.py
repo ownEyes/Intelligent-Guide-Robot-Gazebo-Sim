@@ -32,11 +32,11 @@ def generate_launch_description():
     declare_y_position_cmd = DeclareLaunchArgument(
         'y_pose', default_value='0.0',
         description='Specify namespace of the robot')
-    
+
     declare_z_position_cmd = DeclareLaunchArgument(
         'z_pose', default_value='0.0',
         description='Specify namespace of the robot')
-    
+
     declare_yaw_position_cmd = DeclareLaunchArgument(
         'yaw_pose', default_value='0.0',
         description='Specify namespace of the robot')
@@ -46,12 +46,12 @@ def generate_launch_description():
         'xacro ', xacro_file_path,
         ' model:=', 'xbot-u'
     ])
-    
+
     start_gazebo_ros_spawner_cmd = Node(
         package='ros_gz_sim',
         executable='create',
         arguments=[
-             '-name', 'xbot-u',
+            '-name', 'xbot-u',
             '-string', robot_description_content,
             '-x', x_pose,
             '-y', y_pose,
@@ -90,41 +90,41 @@ def generate_launch_description():
         'param',
         'xbot-u_control.yaml'
     )
-    
+
     with open(controller_params_file, 'r') as f:
         controller_params = yaml.safe_load(f)
-    
+
     start_spawn_controllers_cmd = Node(
         package='controller_manager',
         executable='ros2_control_node',
         namespace='/xbot',
         arguments=[
-            '--controller-manager', 
+            '--controller-manager',
             '/xbot/controller_manager',
             'joint_state_controller',
             'yaw_platform_position_controller',
             'pitch_platform_position_controller',
         ],
         output='screen',
-        parameters=[controller_params]
+        parameters=[controller_params, {'use_sim_time': True}]
     )
-    
+
     vel_mux_params_file = os.path.join(
         get_package_share_directory('robot_simulation'),
         'param',
         'mux.yaml'
     )
-    
+
     with open(vel_mux_params_file, 'r') as f:
         vel_mux_params = yaml.safe_load(f)['cmd_vel_mux']['ros__parameters']
-    
+
     start_cmd_vel_mux_node_cmd = Node(
         package='cmd_vel_mux',
         executable='cmd_vel_mux_node',
         output='both',
-        parameters=[vel_mux_params]
+        parameters=[vel_mux_params, {'use_sim_time': True}]
     )
-    
+
     ld = LaunchDescription()
 
     # Declare the launch options
