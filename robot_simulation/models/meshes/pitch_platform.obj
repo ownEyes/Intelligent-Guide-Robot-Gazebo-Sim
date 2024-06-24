@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib pitch_platform.mtl
+mtllib ./pitch_platform.mtl
 g default
 v 0.003018 0.029000 0.000317
 v 0.010518 0.029000 0.000484

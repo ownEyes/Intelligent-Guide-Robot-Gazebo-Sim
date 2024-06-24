@@ -19,6 +19,7 @@ find_package(controller_manager REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
 find_package(ros_gz REQUIRED)
+find_package(pluginlib REQUIRED)
 find_package(cmd_vel_mux REQUIRED)
 
 install(DIRECTORY launch models param urdf worlds 

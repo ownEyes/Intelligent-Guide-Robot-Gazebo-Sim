@@ -1,38 +1,61 @@
-<package>
-  <name>navigation_sim_demo</name>
+<?xml version="1.0"?>
+<?xml-model
+   href="http://download.ros.org/schema/package_format3.xsd"
+   schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>navigation_simulation</name>
   <version>0.0.1</version>
-  <description>
-  A navigation demo of xbot-u, with gmapping, amcl.
-  </description>
-  <author>Chai Changkun</author>
-  <author>Han JinFei</author>
-  <maintainer email="chaichangkun@163.com">Chai Changkun</maintainer>
-  <maintainer email="hanjf_robin@163.com">Han Jinfei</maintainer>
-  <license>BSD</license>
-  <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>roscpp</build_depend>
-  <build_depend>rospy</build_depend>
-  <build_depend>std_msgs</build_depend>
-  <build_depend>message_generation</build_depend>
-  <build_depend>gazebo_ros</build_depend>
+  <description>A navigation module, with gmapping, amcl.</description>
+  <maintainer email="ximenzi@nus-iss.com">ximenzi</maintainer>
+  <license>MIT</license>
 
-  <run_depend>roscpp</run_depend>
-  <run_depend>rospy</run_depend>
-  <run_depend>std_msgs</run_depend>
-  <run_depend>controller_manager</run_depend>
-  <run_depend>urdf</run_depend>
-  <run_depend>effort_controllers</run_depend>
-  <run_depend>gazebo_plugins</run_depend>
-  <run_depend>gazebo_ros</run_depend>
-  <run_depend>gazebo_ros_control</run_depend>
-  <run_depend>joint_state_controller</run_depend>
-  <run_depend>joint_state_publisher</run_depend>
-  <run_depend>robot_state_publisher</run_depend>
-  <run_depend>message_runtime</run_depend>
-  <run_depend>xacro</run_depend>
-  <run_depend>move_base</run_depend>
-  <run_depend>map_server</run_depend>  
-  <run_depend>amcl</run_depend>
-  <run_depend>gmapping</run_depend>
-  <run_depend>dwa_local_planner</run_depend>
+  <!-- ROS2 uses ament_cmake as its build tool -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- List of ROS2 build dependencies -->
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <!-- message_generation in ROS1 is replaced by rosidl_default_generators in ROS2 -->
+  <depend>rosidl_default_generators</depend>
+  <!-- Replace gazebo_ros with the appropriate ROS2 gazebo packages -->
+  <!-- <depend>gazebo_ros_pkgs</depend> -->
+  <depend>ros_gz</depend>
+
+  <!-- List of ROS2 exec dependencies -->
+  <!-- <exec_depend>rclcpp</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend> -->
+  <!-- controller_manager in ROS1 might correspond to controller_manager_msgs or similar in ROS2 -->
+  <!-- Similarly, replace other dependencies with their ROS2 equivalents -->
+  <!-- <exec_depend>gazebo_ros_pkgs</exec_depend> -->
+  <!-- Note: Some packages such as move_base, amcl, gmapping, dwa_local_planner are part of -->
+  <!-- the navigation2 stack in ROS2 or have different equivalents -->
+  <depend>navigation2</depend>
+  <depend>nav2_bringup</depend>
+  <depend>nav2_map_server</depend>
+  <depend>nav2_amcl</depend>
+  <depend>nav2_dwb_controller</depend>
+  <depend>controller_manager</depend>
+  <depend>urdf</depend>
+  <depend>ros2_controllers</depend>
+  <depend>slam_toolbox</depend> <!-- Possible replacement for gmapping -->
+  <!-- ... add other run/exec dependencies as necessary -->
+
+  <!-- In ROS2, the message_runtime package is not needed because it's part of the build tool -->
+  <!-- xacro is still required if you are using xacro files -->
+  <depend>xacro</depend>
+
+  <depend>joint_state_broadcaster </depend>
+  <depend>joint_state_publisher</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>rosidl_runtime_cpp</depend>
+  <depend>robot_localization</depend>
+
+  <depend>rf2o_laser_odometry</depend>
+
+  <export>
+    <!-- Other export tags if needed -->
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

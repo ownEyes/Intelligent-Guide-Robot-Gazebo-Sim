@@ -3,7 +3,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 1.00 1.00 1.00
 Tf 1.00 1.00 1.00
-map_Kd uvtietu.jpg
+map_Kd ./uvtietu.jpg
 Ni 1.00
 Ks 0.80 0.80 0.80
 Ns 98.00
@@ -12,7 +12,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 1.00 1.00 1.00
 Tf 0.00 0.00 0.00
-map_Kd uvtietu.jpg
+map_Kd ./uvtietu.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 48.00
@@ -21,7 +21,7 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 1.00 1.00 1.00
 Tf 1.00 1.00 1.00
-map_Kd uvtietu.jpg
+map_Kd ./uvtietu.jpg
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 48.00

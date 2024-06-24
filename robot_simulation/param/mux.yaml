@@ -10,6 +10,7 @@
 #   short_desc:     Short description (optional)
 cmd_vel_mux:
   ros__parameters:
+    use_sim_time : True
     subscribers:
         default_input:
           topic:       "input/default"

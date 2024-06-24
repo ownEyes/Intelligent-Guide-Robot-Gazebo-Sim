@@ -13,7 +13,7 @@
 
   <xacro:include filename="$(find robot_simulation)/urdf/materials.xacro" />
   <xacro:include filename="$(find robot_simulation)/urdf/xbot-u.urdf.xacro" />
-  <xacro:include filename="$(find robot_simulation)/urdf/xbot-u.gazebo" />
+  <!-- <xacro:include filename="$(find robot_simulation)/urdf/xbot-u.gazebo" /> -->
   <xacro:xbot2_base/>
 
 

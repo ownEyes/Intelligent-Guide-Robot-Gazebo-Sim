@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib xtion_pro_camera.mtl
+mtllib ./xtion_pro_camera.mtl
 g default
 v 0.016616 0.003839 0.077833
 v 0.016616 0.006324 0.076709

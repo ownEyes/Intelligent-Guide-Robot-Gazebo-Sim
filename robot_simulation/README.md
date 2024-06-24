@@ -6,8 +6,14 @@ robot_sim_demo软件包，为Xbot机器人Gazebo仿真程序。
 
 确认`robot_sim_demo`已被编译, 执行以下命令启动仿真环境
 
-```sh
-$ roslaunch robot_sim_demo robot_spawn.launch
+```
+
+rosdep install --ignore-packages-from-source --from-path src/Intelligent-Guide-Robot-Gazebo-Sim/robot_simulation/ --rosdistro humble -y
+ps aux | grep gz
+#or
+ps aux | grep gazebo
+ros2 run tf2_tools view_frames
+
 ```
 初次启动Gazebo需要几分钟的加载时间，Gazebo会从服务器上下载材质。
 

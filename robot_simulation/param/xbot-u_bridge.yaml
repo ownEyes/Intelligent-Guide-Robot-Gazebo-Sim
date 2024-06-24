@@ -12,7 +12,7 @@
   direction: GZ_TO_ROS
 
 # gz topic published by DiffDrive plugin
-- ros_topic_name: "odom"
+- ros_topic_name: "odom_raw"
   gz_topic_name: "odom"
   ros_type_name: "nav_msgs/msg/Odometry"
   gz_type_name: "gz.msgs.Odometry"
@@ -47,9 +47,14 @@
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
 
-# gz topic published by Sensors plugin (Camera)
-- ros_topic_name: "camera/camera_info"
-  gz_topic_name: "camera/camera_info"
-  ros_type_name: "sensor_msgs/msg/CameraInfo"
+- gz_topic_name: "camera/depth/points"
+  ros_topic_name: "camera/depth/points"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  direction: "GZ_TO_ROS"
+
+- gz_topic_name: "camera/depth/camera_info"
+  ros_topic_name: "camera/depth/camera_info"
   gz_type_name: "gz.msgs.CameraInfo"
-  direction: GZ_TO_ROS
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  direction: "GZ_TO_ROS"
