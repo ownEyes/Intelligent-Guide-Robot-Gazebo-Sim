@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib yaw_platform.mtl
+mtllib ./yaw_platform.mtl
 g default1
 v 0.022935 -0.000782 0.000286
 v 0.022935 -0.005370 0.000272

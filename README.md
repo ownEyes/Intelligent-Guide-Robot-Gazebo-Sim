@@ -14,10 +14,30 @@ colcon build --packages-select cmd_vel_mux
 colcon build --packages-select robot_simulation
 
 ros2 launch robot_simulation robot_museum.launch.py
-  
-
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/SerializePoseGraph "{filename: 'museum'}"
+ros2 run nav2_map_server map_saver_cli -f museum
+ros2 launch navigation_simulation view_navigation.launch.py
 ```
 ---
+
+how to start:
+1. preparations
+do this every time when open a new terminal
+```
+ conda activate ros2_dl
+ cd ros2_ws/
+ source install/setup.bash
+```
+2. run gazebo simulation
+```
+ros2 launch robot_simulation robot_museum.launch.py
+```
+3. start navigation
+```
+ros2 launch navigation_simulation view_navigation.launch.py
+#or
+ros2 launch navigation_simulation view_slam_navigation.launch.py
+```
 
 - [Github SSH Key Setup](#github-ssh-key-setup)
 - [GitHub Workflow](#github-workflow)

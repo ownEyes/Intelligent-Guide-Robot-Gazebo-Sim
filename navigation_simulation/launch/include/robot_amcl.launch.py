@@ -8,65 +8,39 @@ from launch.substitutions import PathJoinSubstitution
 
 def generate_launch_description():
     params_file = PathJoinSubstitution([
-        FindPackageShare('navigation_simulation'), 'param', 'amsl_params.yaml'
+        FindPackageShare('navigation_simulation'), 'param', 'amcl_params.yaml'
     ])
 
+    amcl_lifecycle_manager = Node(
+        package='nav2_lifecycle_manager',
+        executable='lifecycle_manager',
+        name='lifecycle_manager_amcl',
+        output='screen',
+        parameters=[{
+            'use_sim_time': True,
+            'autostart': True,
+            # Add or remove nodes as per your setup
+            'node_names': ['amcl'],
+            'bond_timeout': 10.0
+        }]
+    )
+
     return LaunchDescription([
-        DeclareLaunchArgument(
-            'use_map_topic',
-            default_value='true',
-            description='Whether to subscribe to the map topic.'
-        ),
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value='true',
-            description='Whether to use Gazebo clock'
-        ),
         DeclareLaunchArgument(
             'scan_topic',
             default_value='scan',
             description='The scan topic.'
         ),
-        DeclareLaunchArgument(
-            'initial_pose_x',
-            default_value='0.0',
-            description='Initial pose in X.'
-        ),
-        DeclareLaunchArgument(
-            'initial_pose_y',
-            default_value='0.0',
-            description='Initial pose in Y.'
-        ),
-        DeclareLaunchArgument(
-            'initial_pose_a',
-            default_value='0.0',
-            description='Initial pose orientation (yaw).'
-        ),
-        DeclareLaunchArgument(
-            'odom_frame_id',
-            default_value='odom',
-            description='The odometry frame id.'
-        ),
-        DeclareLaunchArgument(
-            'base_frame_id',
-            default_value='base_footprint',
-            description='The robot base frame id.'
-        ),
-        DeclareLaunchArgument(
-            'global_frame_id',
-            default_value='map',
-            description='The global frame id.'
-        ),
-
         Node(
             package='nav2_amcl',
             executable='amcl',
             name='amcl',
             output='screen',
             parameters=[params_file],
-            remappings=[('scan', LaunchConfiguration('scan_topic')),
+            remappings=[('/scan', LaunchConfiguration('scan_topic')),
                         ('/tf', 'tf'),
                         ('/tf_static', 'tf_static'),
                         ],
-        )
+        ),
+        amcl_lifecycle_manager
     ])

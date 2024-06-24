@@ -5,19 +5,19 @@
       <inertial>
         <mass>15</mass>
         <inertia>
-          <ixx>0.0</ixx>
+          <ixx>0.01</ixx>
           <ixy>0.0</ixy>
           <ixz>0.0</ixz>
-          <iyy>0.0</iyy>
+          <iyy>0.01</iyy>
           <iyz>0.0</iyz>
-          <izz>0.0</izz>
+          <izz>0.01</izz>
         </inertia>
       </inertial>
       <collision name="collision">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://ISCAS_Museum/meshes/ISCAS_museum.dae</uri>
+            <uri>model://ISCAS_Museum/meshes/ISCASmuseum.obj</uri>
           </mesh>
         </geometry>
       </collision>
@@ -25,7 +25,7 @@
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://ISCAS_Museum/meshes/ISCAS_museum.dae</uri>
+            <uri>model://ISCAS_Museum/meshes/ISCASmuseum.obj</uri>
           </mesh>
         </geometry>
       </visual>

@@ -22,7 +22,15 @@ def generate_launch_description():
         'robot.xacro'
     )
 
-    print('xacro_file_path : {}'.format(xacro_file_path))
+    # print('xacro_file_path : {}'.format(xacro_file_path))
+
+    # urdf_path = os.path.join(
+    #     get_package_share_directory('robot_simulation'),
+    #     'urdf',
+    #     'xbot-u.urdf')
+
+    # with open(urdf_path, 'r') as infp:
+    #     robot_desc = infp.read()
 
     # Process .xacro file to generate URDF
     robot_desc = xacro.process_file(xacro_file_path).toprettyxml(indent=' ')
@@ -41,7 +49,7 @@ def generate_launch_description():
             package='robot_state_publisher',
             executable='robot_state_publisher',
             name='robot_state_publisher',
-            namespace='/xbot',
+            # namespace='/xbot',
             output='screen',
             parameters=[{
                 'use_sim_time': use_sim_time,

@@ -18,7 +18,7 @@
   <!-- 可能有问题 -->
   <depend>rosidl_default_generators</depend>
 
-  <depend>ros_gz</depend>
+  <!-- <depend>ros_gz</depend> -->
 
   <depend>controller_manager</depend>
   <depend>urdf</depend>
@@ -35,6 +35,13 @@
   <depend>joint_state_broadcaster </depend>
   <depend>joint_state_publisher</depend>
   <depend>robot_state_publisher</depend>
+
+  <depend>forward_command_controller</depend>
+  <depend>ros_gz_sim</depend>
+  <depend>gz_ros2_control</depend>
+  <!-- <depend>joint_state_publisher_gui</depend>
+  <depend>joint_trajectory_controller</depend>
+  <depend>ros2controlcli</depend> -->
 
   <!-- 需要自己安装再试 -->
   <depend>cmd_vel_mux</depend>

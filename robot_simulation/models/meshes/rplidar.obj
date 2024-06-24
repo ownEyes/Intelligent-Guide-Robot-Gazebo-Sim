@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib rplidar.mtl
+mtllib ./rplidar.mtl
 g default
 v -0.029667 -0.016136 -0.000340
 v -0.026804 -0.020427 -0.000337

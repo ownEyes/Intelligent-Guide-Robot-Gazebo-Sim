@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib realsense.mtl
+mtllib ./realsense.mtl
 g default1
 v -0.000314 -0.034633 0.025766
 v 0.000478 -0.035053 0.025735

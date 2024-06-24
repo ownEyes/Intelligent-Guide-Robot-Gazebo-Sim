@@ -50,6 +50,9 @@
   <depend>joint_state_publisher</depend>
   <depend>robot_state_publisher</depend>
   <depend>rosidl_runtime_cpp</depend>
+  <depend>robot_localization</depend>
+
+  <depend>rf2o_laser_odometry</depend>
 
   <export>
     <!-- Other export tags if needed -->

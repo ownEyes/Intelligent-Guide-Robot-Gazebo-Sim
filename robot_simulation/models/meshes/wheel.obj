@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib wheel.mtl
+mtllib ./wheel.mtl
 g default1
 v 0.015510 0.072247 -0.036802
 v 0.015510 0.057340 -0.057320
